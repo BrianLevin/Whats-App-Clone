@@ -4,6 +4,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {Avatar, IconButton } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
+import SidebarChat from "./SidebarChat";
 import "./Sidebar.css";
 
 function Sidebar() {
