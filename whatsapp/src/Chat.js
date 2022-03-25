@@ -1,20 +1,35 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import MicIcon from '@mui/icons-material/Mic';
 import {
   AttachFile,
   InsertEmoticon,
   MoreVert,
   SearchOutlined,
 } from "@material-ui/icons";
+import "./Chat.css";
+import MicIcon from "@material-ui/icons/Mic";
+import axios from "./axios";
 
-import "./Chat.css"
-function Chat() {
+const Chat = ({ messages }) => {
+  const [input, setInput] = useState("");
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    await axios.post("/messages/new", {
+      message: input,
+      name: "Gopal",
+      timestamp: "Just now",
+      received: true,
+    });
+
+    setInput("");
+  };
   return (
-    <div className ="chat"><h1>I am the chat</h1>
-    <div className="chat_header">
-    <Avatar />
-    <div className="chat__headerInfo">
+    <div className="chat">
+      <div className="chat__header">
+        <Avatar />
+        <div className="chat__headerInfo">
           <h3>Room name</h3>
           <p>Last seen at...</p>
         </div>
@@ -29,8 +44,9 @@ function Chat() {
             <MoreVert />
           </IconButton>
         </div>
-    </div>
-    <div className="chat__body">
+      </div>
+
+      <div className="chat__body">
         {messages.map((message, i) => {
           return (
             <p
@@ -46,7 +62,8 @@ function Chat() {
           );
         })}
       </div>
-        <div className="chat__footer">
+
+      <div className="chat__footer">
         <InsertEmoticon />
         <form>
           <input
@@ -67,4 +84,4 @@ function Chat() {
   );
 };
 
-export default Chat
+export default Chat;
